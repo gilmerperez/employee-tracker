@@ -159,3 +159,7 @@ yarn.lock
 
 # Local Netlify folder
 .netlify
+
+package-lock.json
+.env
+node_modules/
