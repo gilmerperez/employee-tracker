@@ -24,7 +24,33 @@ async function mainMenu() {
         },
     ]);
 
-    
+    switch (action) {
+        case 'View all Departments':
+          await viewAllDepartments();
+          break;
+        case 'View all Roles':
+          await viewAllRoles();
+          break;
+        case 'View all Employees':
+          await viewAllEmployees();
+          break;
+        case 'Add a Department':
+          await addDepartment();
+          break;
+        case 'Add a Role':
+          await addRole();
+          break;
+        case 'Add an Employee':
+          await addEmployee();
+          break;
+        case 'Update an Employee Role':
+          await updateEmployeeRole();
+          break;
+        case 'Exit':
+          console.log('See you next time!');
+          process.exit();
+      }
+      mainMenu();
 }
 
 // WHEN I choose to add a department
