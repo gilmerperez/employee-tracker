@@ -74,6 +74,14 @@ async function addDepartment() {
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 async function addRole() {
+    const departmentResult = await pool.query('SELECT id, name FROM department');
+    const departments = departmentResult.rows;
+
+    const departmentChoices = departments.map(department => ({
+        name: department.name,
+        value: department.id
+    }));
+
     const { title, salary, department_id } = await inquirer.prompt([
         {
             type: 'input',
@@ -87,10 +95,10 @@ async function addRole() {
             validate: (value) => !isNaN(Number(value)) || 'Please enter a valid number',
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'department_id',
-            message: 'Which Department ID does this Role belong to? (Engineering 1) (Finance 2) (Legal 3) (Sales 4) (Service 5)',
-            validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Department ID',
+            message: 'Which Department does this role belong to?',
+            choices: departmentChoices,
         },
     ]);
 
@@ -116,6 +124,19 @@ async function addEmployee() {
         value: role.id
     }));
 
+    const employeeResult = await pool.query('SELECT id, first_name, last_name FROM employee');
+    const employees = employeeResult.rows;
+
+    const managerChoices = employees.map(employee => ({
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id
+    }));
+
+    managerChoices.unshift({
+        name: 'No Manager',
+        value: null
+    });
+
     const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
         {
             type: 'input',
@@ -134,11 +155,10 @@ async function addEmployee() {
             choices: roleChoices,
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'manager_id',
-            message: "Enter the employee's manager ID (leave blank if none):",
-            default: null,
-            validate: (value) => value === '' || !isNaN(Number(value)) || 'Please enter a valid Manager ID',
+            message: "Who is the Employee's Manager?",
+            choices: managerChoices,
         },
     ]);
 
@@ -152,6 +172,7 @@ async function addEmployee() {
         console.error('Error adding Employee', error);
     }
 }
+
 
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
