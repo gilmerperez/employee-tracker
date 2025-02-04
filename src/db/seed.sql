@@ -21,11 +21,11 @@ VALUES ('Sales Lead', 100000, 1),
 -- Here, role_id references what id that depaertment is part of in the role table
 -- Here, manager_id references what the id of the manager is in the department they are in
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('John', 'Doe', 1),
+VALUES ('John', 'Doe', 1, NULL),
        ('Mike', 'Chan', 2, 1),
-       ('Ashley', 'Rodrigues', 3),
+       ('Ashley', 'Rodrigues', 3, NULL),
        ('Kevin', 'Tupik', 4, 3),
-       ('Kunal', 'Singh', 5),
+       ('Kunal', 'Singh', 5, NULL),
        ('Malia', 'Brown', 6, 5),
-       ('Sarah', 'Lourd', 7),
+       ('Sarah', 'Lourd', 7, NULL),
        ('Tom', 'Allen', 8, 7);
