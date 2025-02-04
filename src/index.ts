@@ -1,8 +1,31 @@
 // Import necessary modules and exports
-// import express from 'express';
 import inquirer from 'inquirer'; 
 import { QueryResult } from 'pg';
 import { pool } from './db/index.js';
+import { viewAllDepartments, viewAllRoles, viewAllEmployees } from './db/index.js';
+
+// Main Menu
+async function mainMenu() {
+    const { action } = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'action',
+            message: 'What would you like to do?',
+            choices: [
+                'View all Departments',
+                'View all Roles',
+                'View all Employees',
+                'Add a Department',
+                'Add a Role',
+                'Add an Employee',
+                'Update an Employee Role',
+                'Exit'
+            ],
+        },
+    ]);
+
+    
+}
 
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the database
