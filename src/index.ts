@@ -55,6 +55,22 @@ async function mainMenu() {
 
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the database
+async function addDepartment() {
+    const { name } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Enter the name of the department:',
+      },
+    ]);
+  
+    try {
+      await pool.query('INSERT INTO department (name) VALUES ($1)', [name]);
+      console.log(`Department "${name}" added successfully!`);
+    } catch (error) {
+      console.error('Error adding Department', error);
+    }
+  }
 
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
