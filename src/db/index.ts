@@ -23,7 +23,7 @@ export async function viewAllDepartments(): Promise<void> {
     const result: QueryResult = await pool.query(sql);
     console.table(result.rows);
   } catch (error) {
-    console.error('Error displaying departments', error);
+    console.error('Error displaying Departments', error);
   }
 }
 
@@ -39,7 +39,7 @@ export async function viewAllRoles(): Promise<void> {
     const result: QueryResult = await pool.query(sql);
     console.table(result.rows);
   } catch (error) {
-    console.error('Error displaying roles', error);
+    console.error('Error displaying Roles', error);
   }
 }
 
@@ -48,7 +48,7 @@ export async function viewAllRoles(): Promise<void> {
 export async function viewAllEmployees(): Promise<void> {
   try {
     const sql = `
-      SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, employee.manager_id
+      SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, employee.manager_id AS manager
       FROM employee
       JOIN role ON employee.role_id = role.id
       JOIN department ON role.department_id = department.id;
@@ -56,6 +56,6 @@ export async function viewAllEmployees(): Promise<void> {
     const result: QueryResult = await pool.query(sql);
     console.table(result.rows);
   } catch (error) {
-    console.error('Error displaying employees', error);
+    console.error('Error displaying Employees', error);
   }
 }

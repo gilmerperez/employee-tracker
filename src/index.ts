@@ -59,7 +59,7 @@ async function addDepartment() {
         {
             type: 'input',
             name: 'name',
-            message: 'Enter the name of the Department:',
+            message: 'What is the name of the Department?',
         },
     ]);
 
@@ -78,18 +78,18 @@ async function addRole() {
         {
             type: 'input',
             name: 'title',
-            message: 'Enter the Role Title:',
+            message: 'What is the name of the Role?',
         },
         {
             type: 'input',
             name: 'salary',
-            message: 'Enter the salary for this role:',
+            message: 'What is the salary for this Role?',
             validate: (value) => !isNaN(Number(value)) || 'Please enter a valid number',
         },
         {
             type: 'input',
             name: 'department_id',
-            message: 'Enter the Department ID for this role:',
+            message: 'Which Department does this Role belong to? (Engineering 1) | (Finance 2) | (Legal 3) | (Sales 4) | (Service 5)',
             validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Department ID',
         },
     ]);
