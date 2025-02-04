@@ -18,57 +18,50 @@ app.use(express.json());
 
 // WHEN I choose to view all departments
 // THEN I am presented with a formatted table showing department names and department ids
-app.get('/api/department', (_req, res) => {
-  const sql = `SELECT * FROM department`;
-
-  pool.query(sql, (err: Error, result: QueryResult) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    const { rows } = result;
-    res.json({
-      message: 'Success!',
-      data: rows
-    });
-  });
-});
+export async function viewAllDepartments(): Promise<void> {
+  try {
+    const sql = 'SELECT * FROM department';
+    const result: QueryResult = await pool.query(sql);
+    console.table(result.rows);
+  } catch (error) {
+    console.error('Error fetching departments:', error);
+  }
+}
 
 // WHEN I choose to view all roles
 // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
-app.get('/api/role', (_req, res) => {
-  const sql = `SELECT * FROM role`;
-
-  pool.query(sql, (err: Error, result: QueryResult) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    const { rows } = result;
-    res.json({
-      message: 'Success!',
-      data: rows
-    });
-  });
-});
+export async function viewAllRoles(): Promise<void> {
+  try {
+    const sql = `
+      SELECT role.id, role.title, department.name AS department, role.salary
+      FROM role
+      JOIN department ON role.department_id = department.id
+    `;
+    const result: QueryResult = await pool.query(sql);
+    console.table(result.rows);
+  } catch (error) {
+    console.error('Error fetching roles:', error);
+  }
+}
 
 // WHEN I choose to view all employees
 // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
-app.get('/api/employee', (_req, res) => {
-  const sql = `SELECT * FROM employee`;
-
-  pool.query(sql, (err: Error, result: QueryResult) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    const { rows } = result;
-    res.json({
-      message: 'Success!',
-      data: rows
-    });
-  });
-});
+export async function viewAllEmployees(): Promise<void> {
+  try {
+    const sql = `
+      SELECT e.id, e.first_name, e.last_name, role.title AS job_title, department.name AS department,
+             role.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager
+      FROM employee e
+      JOIN role ON e.role_id = role.id
+      JOIN department ON role.department_id = department.id
+      LEFT JOIN employee m ON e.manager_id = m.id
+    `;
+    const result: QueryResult = await pool.query(sql);
+    console.table(result.rows);
+  } catch (error) {
+    console.error('Error fetching employees:', error);
+  }
+}
 
 // Default response for any other request (Not Found)
 app.use((_req, res) => {
