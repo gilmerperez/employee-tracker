@@ -170,7 +170,7 @@ async function updateEmployeeRole() {
         ]);
         console.log(`Employee ID ${employee_id} updated to Role ID ${new_role_id}.`);
     } catch (error) {
-        console.error('Error updating employee role', error);
+        console.error('Error updating Employee Role', error);
     }
 }
 
