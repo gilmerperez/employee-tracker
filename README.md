@@ -15,7 +15,6 @@ The project meets all the acceptance criteria outlined in the user story, ensuri
 - [Key Features](#key-features)
 - [Technology Stack](#technology-stack)
 - [Additional Resources](#additional-resources)
-- [Mock Up](#mock-up)
 
 ## Usage
 
@@ -95,6 +94,10 @@ This project relies on the following tools and technologies:
 
 ## Additional Resources
 
+* [A walkthrough video demonstrating the functionality of the application](./assets/Module-10-Challenge_Walkthrough-Video.webm)
+
+* The URL of the GitHub repository: [GitHub Repository](https://github.com/gilmerperez/employee-tracker)
+
 * Inquirer Documentation: [Inquirer.js](https://www.npmjs.com/package/inquirer)
 
 * pg Package Documentation: [pg](https://www.npmjs.com/package/pg)
@@ -102,9 +105,3 @@ This project relies on the following tools and technologies:
 * PostgreSQL Documentation: [PostgreSQL](https://www.postgresql.org/docs/)
 
 * Video Submission Guide: Video [Submission Guide](https://coding-boot-camp.github.io/full-stack/computer-literacy/video-submission-guide)
-
-## Mock-Up
-
-The following video shows an example of the application being used from the command line:
-
-[![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./assets/12-sql-homework-video-thumbnail.png)](https://2u-20.wistia.com/medias/2lnle7xnpk)
