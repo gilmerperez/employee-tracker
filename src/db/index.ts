@@ -19,7 +19,7 @@ await initDb(); // Ensures the database is connected before proceeding
 // THEN I am presented with a formatted table showing department names and department ids
 export async function viewAllDepartments(): Promise<void> {
   try {
-    const sql = 'SELECT * FROM department';
+    const sql = 'SELECT id, name FROM department';
     const result: QueryResult = await pool.query(sql);
     console.table(result.rows);
   } catch (error) {

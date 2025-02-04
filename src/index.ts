@@ -1,7 +1,6 @@
 // Import necessary modules and exports
 import inquirer from 'inquirer'; 
-import { QueryResult } from 'pg';
-import { pool } from './db/index.js';
+import { pool } from './db/connection.js';
 import { viewAllDepartments, viewAllRoles, viewAllEmployees } from './db/index.js';
 
 // Main Menu
@@ -90,7 +89,7 @@ async function addRole() {
         {
             type: 'input',
             name: 'department_id',
-            message: 'Enter the department ID for this role:',
+            message: 'Enter the Department ID for this role:',
             validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Department ID',
         },
     ]);
