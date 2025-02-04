@@ -94,7 +94,7 @@ This project relies on the following tools and technologies:
 
 ## Additional Resources
 
-* A Walkthrough Video that demonstrates the functionality of the application: [Walkthrough Video Link](./assets/Module-10-Challenge_Walkthrough-Video.webm)
+* A Walkthrough Video that demonstrates the functionality of the application: [Walkthrough Video Link](https://drive.google.com/file/d/15Icov362B976wsK14DfhUPXOGE5zEZHp/view?usp=drive_link)
 
 * The URL of the GitHub repository: [GitHub Repository](https://github.com/gilmerperez/employee-tracker)
 
