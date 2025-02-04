@@ -89,7 +89,7 @@ async function addRole() {
         {
             type: 'input',
             name: 'department_id',
-            message: 'Which Department does this Role belong to? (Engineering 1) | (Finance 2) | (Legal 3) | (Sales 4) | (Service 5)',
+            message: 'Which Department ID does this Role belong to? (Engineering 1) (Finance 2) (Legal 3) (Sales 4) (Service 5)',
             validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Department ID',
         },
     ]);
@@ -108,6 +108,14 @@ async function addRole() {
 // WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 async function addEmployee() {
+    const roleResult = await pool.query('SELECT id, title FROM role');
+    const roles = roleResult.rows;
+
+    const roleChoices = roles.map(role => ({
+        name: role.title,
+        value: role.id
+    }));
+
     const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
         {
             type: 'input',
@@ -120,10 +128,10 @@ async function addEmployee() {
             message: "Enter the Employee's Last Name:",
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'role_id',
-            message: "Enter the Employee's Role ID:",
-            validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Role ID',
+            message: "Select the Employee's Role:",
+            choices: roleChoices,
         },
         {
             type: 'input',
