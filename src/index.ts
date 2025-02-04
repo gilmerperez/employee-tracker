@@ -91,7 +91,7 @@ async function addRole() {
         type: 'input',
         name: 'department_id',
         message: 'Enter the department ID for this role:',
-        validate: (value) => !isNaN(Number(value)) || 'Please enter a valid department ID',
+        validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Department ID',
       },
     ]);
   
@@ -108,6 +108,43 @@ async function addRole() {
 
 // WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+async function addEmployee() {
+    const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'first_name',
+        message: "Enter the Employee's First Name:",
+      },
+      {
+        type: 'input',
+        name: 'last_name',
+        message: "Enter the Employee's Last Name:",
+      },
+      {
+        type: 'input',
+        name: 'role_id',
+        message: "Enter the Employee's Role ID:",
+        validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Role ID',
+      },
+      {
+        type: 'input',
+        name: 'manager_id',
+        message: "Enter the employee's manager ID (leave blank if none):",
+        default: null,
+        validate: (value) => value === '' || !isNaN(Number(value)) || 'Please enter a valid Manager ID',
+      },
+    ]);
+  
+    try {
+      await pool.query(
+        'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)',
+        [first_name, last_name, role_id, manager_id || null]
+      );
+      console.log(`Employee "${first_name} ${last_name}" added successfully!`);
+    } catch (error) {
+      console.error('Error adding Employee', error);
+    }
+  }
 
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
