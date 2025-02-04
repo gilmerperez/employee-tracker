@@ -174,3 +174,6 @@ async function updateEmployeeRole() {
         console.error('Error updating employee role', error);
     }
 }
+
+// Start the prompt
+mainMenu();
