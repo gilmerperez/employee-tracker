@@ -60,7 +60,7 @@ async function addDepartment() {
       {
         type: 'input',
         name: 'name',
-        message: 'Enter the name of the department:',
+        message: 'Enter the name of the Department:',
       },
     ]);
   
@@ -74,6 +74,37 @@ async function addDepartment() {
 
 // WHEN I choose to add a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+async function addRole() {
+    const { title, salary, department_id } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'title',
+        message: 'Enter the Role Title:',
+      },
+      {
+        type: 'input',
+        name: 'salary',
+        message: 'Enter the salary for this role:',
+        validate: (value) => !isNaN(Number(value)) || 'Please enter a valid number',
+      },
+      {
+        type: 'input',
+        name: 'department_id',
+        message: 'Enter the department ID for this role:',
+        validate: (value) => !isNaN(Number(value)) || 'Please enter a valid department ID',
+      },
+    ]);
+  
+    try {
+      await pool.query(
+        'INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)',
+        [title, salary, department_id]
+      );
+      console.log(`Role "${title}" added successfully!`);
+    } catch (error) {
+      console.error('Error adding Role', error);
+    }
+  }
 
 // WHEN I choose to add an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
