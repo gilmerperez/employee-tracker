@@ -1,6 +1,6 @@
-// Import necessary modules and exports 
+// Import necessary modules and exports
+// import express from 'express';
 import inquirer from 'inquirer'; 
-import express from 'express';
 import { QueryResult } from 'pg';
 import { pool } from './db/index.js';
 

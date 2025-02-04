@@ -1,20 +1,19 @@
 // Import necessary modules and exports 
-import express from 'express';
 import { QueryResult } from 'pg';
 import { pool, connectToDb } from './connection.js';
 
 // Establishes connection to Database before doing anything else
-await connectToDb();
+async function initDb() {
+  try {
+    await connectToDb();
+    console.log('Success! Connected to the database');
+  } catch (error) {
+    console.error('Error! Database connection failed', error);
+    process.exit(1);
+  }
+}
 
-// Set up server environment variables and Express instance
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-// API ROUTES
+await initDb(); // Ensures the database is connected before proceeding
 
 // WHEN I choose to view all departments
 // THEN I am presented with a formatted table showing department names and department ids
@@ -24,7 +23,7 @@ export async function viewAllDepartments(): Promise<void> {
     const result: QueryResult = await pool.query(sql);
     console.table(result.rows);
   } catch (error) {
-    console.error('Error fetching departments:', error);
+    console.error('Error displaying departments', error);
   }
 }
 
@@ -35,12 +34,12 @@ export async function viewAllRoles(): Promise<void> {
     const sql = `
       SELECT role.id, role.title, department.name AS department, role.salary
       FROM role
-      JOIN department ON role.department_id = department.id
+      JOIN department ON role.department_id = department.id;
     `;
     const result: QueryResult = await pool.query(sql);
     console.table(result.rows);
   } catch (error) {
-    console.error('Error fetching roles:', error);
+    console.error('Error displaying roles', error);
   }
 }
 
@@ -49,26 +48,14 @@ export async function viewAllRoles(): Promise<void> {
 export async function viewAllEmployees(): Promise<void> {
   try {
     const sql = `
-      SELECT e.id, e.first_name, e.last_name, role.title AS job_title, department.name AS department,
-             role.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager
-      FROM employee e
-      JOIN role ON e.role_id = role.id
-      JOIN department ON role.department_id = department.id
-      LEFT JOIN employee m ON e.manager_id = m.id
+      SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, employee.manager_id
+      FROM employee
+      JOIN role ON employee.role_id = role.id
+      JOIN department ON role.department_id = department.id;
     `;
     const result: QueryResult = await pool.query(sql);
     console.table(result.rows);
   } catch (error) {
-    console.error('Error fetching employees:', error);
+    console.error('Error displaying employees', error);
   }
 }
-
-// Default response for any other request (Not Found)
-app.use((_req, res) => {
-  res.status(404).end();
-});
-
-// Starts server and listes for requests
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
