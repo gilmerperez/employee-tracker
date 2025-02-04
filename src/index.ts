@@ -1,4 +1,8 @@
-import inquirer from 'inquirer';
+// Import necessary modules and exports 
+import inquirer from 'inquirer'; 
+import express from 'express';
+import { QueryResult } from 'pg';
+import { pool } from './db/index.js';
 
 // WHEN I choose to add a department
 // THEN I am prompted to enter the name of the department and that department is added to the database

@@ -14,6 +14,8 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// API ROUTES
+
 // WHEN I choose to view all departments
 // THEN I am presented with a formatted table showing department names and department ids
 app.get('/api/department', (_req, res) => {
