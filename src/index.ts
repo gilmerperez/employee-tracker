@@ -177,18 +177,34 @@ async function addEmployee() {
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 async function updateEmployeeRole() {
+    const employeeResult = await pool.query('SELECT id, first_name, last_name FROM employee');
+    const employees = employeeResult.rows;
+
+    const employeeChoices = employees.map(employee => ({
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id
+    }));
+
+    const roleResult = await pool.query('SELECT id, title FROM role');
+    const roles = roleResult.rows;
+
+    const roleChoices = roles.map(role => ({
+        name: role.title,
+        value: role.id
+    }));
+
     const { employee_id, new_role_id } = await inquirer.prompt([
         {
-            type: 'input',
+            type: 'list',
             name: 'employee_id',
-            message: 'Enter the ID of the Employee you wish to update:',
-            validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Employee ID',
+            message: "Which Employee's Role do you want to update?",
+            choices: employeeChoices,
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'new_role_id',
-            message: "Enter the employee's new role ID:",
-            validate: (value) => !isNaN(Number(value)) || 'Please enter a valid Role ID',
+            message: "Which Role do you want to assign the selected Employee?",
+            choices: roleChoices,
         },
     ]);
 
