@@ -1,6 +1,6 @@
 # Employee Tracker Using PostgreSQL
 
-## Description
+## Project Overview
 
 The Employee Tracker is a command-line application designed to manage a company's employee database. It allows users to interact with the database and perform CRUD (Create, Read, Update, Delete) operations related to employees, roles, and departments. This tool is aimed at business owners and managers who need an efficient and organized way to track employees, their roles, and their respective departments within the company.
 
@@ -18,90 +18,69 @@ The project meets all the acceptance criteria outlined in the user story, ensuri
 
 ## Usage
 
-To start the application, run the following command in your terminal:
-
-```bash
-npm install
-npm run start
-```
-
-## Instructions 
-
-1. Clone the repository to your local machine:
-
-```bash
-git clone <repository_url>
-cd <repository_folder>
-```
-
-2. Install dependencies
+To start the application, run the following commands in your terminal:
 
 ```bash
 npm install
 ```
 
-3. Create a PostgreSQL database and configure your .env file with your PostgreSQL credentials.
-
-4. Populate the database using the seeds.sql file or manually insert initial data as per the schema.
-
-5. Start the application:
-
 ```bash
 npm run start
 ```
 
-6. Use the interactive menu to:
+## Instructions
 
-* View all Departments
+### 1. Clone the repository to your local machine
+```bash
+git clone git@github.com:gilmerperez/employee-tracker.git
+```
 
-* View all Roles
+### 2. Install dependencies
 
-* View all Employees
+```bash
+npm install
+```
 
-* Add a Department
+### 3. Create a PostgreSQL database and configure your `.env` file with your PostgreSQL credentials
 
-* Add a Role
+### 4. Populate the database using the seeds.sql file or manually insert initial data as per the schema
 
-* Add an Employee
+### 5. Start the application
+```bash
+npm run start
+```
 
-* Update an Employee's Role
+### 6. Use the interactive menu to
+
+1. View all Departments
+2. View all Roles
+3. View all Employees
+4. Add a Department
+5. Add a Role
+6. Add an Employee
+7. Update an Employee's Role
 
 ## Key Features
 
-* View all departments and their IDs.
-
-* View all roles with job titles, department, and salary information.
-
-* View a list of all employees, their roles, and manager information.
-
-* Add new departments, roles, and employees to the database.
-
-* Update employee roles based on their ID.
-
-* The application allows non-developers to manage their workforce easily through a CLI interface.
+- View all departments and their IDs.
+- Update employee roles based on their ID.
+- Add new departments, roles, and employees to the database.
+- View all roles with job titles, department, and salary information.
+- View a list of all employees, their roles, and manager information.
+- The application allows non-developers to manage their workforce easily through a CLI interface.
 
 ## Technology Stack
 
 This project relies on the following tools and technologies:
-
-* **Node.js:** A JavaScript runtime used to build the command-line application and handle asynchronous database queries.
-
 * **Inquirer (v8.2.4):** A package for creating interactive prompts in the command line to gather user input.
-
-* **PostgreSQL:** A powerful relational database management system used to store employee, role, and department data.
-
 * **pg:** The PostgreSQL client for Node.js, used to connect and query the PostgreSQL database asynchronously.
+* **PostgreSQL:** A powerful relational database management system used to store employee, role, and department data.
+* **Node.js:** A JavaScript runtime used to build the command-line application and handle asynchronous database queries.
 
 ## Additional Resources
 
-* A Walkthrough Video that demonstrates the functionality of the application: [Walkthrough Video Link](https://drive.google.com/file/d/15Icov362B976wsK14DfhUPXOGE5zEZHp/view?usp=drive_link)
+pg Package Documentation: [pg](https://www.npmjs.com/package/pg)
 
-* The URL of the GitHub repository: [GitHub Repository](https://github.com/gilmerperez/employee-tracker)
+Inquirer Documentation: [Inquirer.js](https://www.npmjs.com/package/inquirer)
 
-* Inquirer Documentation: [Inquirer.js](https://www.npmjs.com/package/inquirer)
-
-* pg Package Documentation: [pg](https://www.npmjs.com/package/pg)
-
-* PostgreSQL Documentation: [PostgreSQL](https://www.postgresql.org/docs/)
-
-* Video Submission Guide: Video [Submission Guide](https://coding-boot-camp.github.io/full-stack/computer-literacy/video-submission-guide)
+PostgreSQL Documentation: [PostgreSQL](https://www.postgresql.org/docs/)
